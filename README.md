@@ -1,6 +1,6 @@
 <!--
   profile README
-  intentionally built with GitHub-flavored Markdown + GitHub-safe HTML only.
+  built with GitHub-flavored Markdown + GitHub-safe HTML only.
   no GitSkins section renders, no custom SVG cards, no generated dashboard images.
 -->
 
@@ -76,7 +76,7 @@
 
 <table>
   <tr>
-    <td width="43%" valign="top">
+    <td width="38%" valign="top">
       <sub>HEARTS2HEARTS</sub>
       <h3>Juun ♡</h3>
       <p><code>my bias</code> <code>h2h</code> <code>favorite</code></p>
@@ -86,34 +86,19 @@
       </p>
       <p><sub>just a tiny Juun corner on my GitHub.</sub></p>
     </td>
-    <td width="57%" valign="top">
+    <td width="62%" valign="top" align="center">
       <sub>FAVORITE FRAMES</sub>
       <h3>Juun gallery</h3>
       <p>
-        the photos will live directly in this repo as normal PNG files — no generated SVG card.
+        <img src="./assets/juun/1.png" width="165" alt="Juun 1" />
+        <img src="./assets/juun/2.png" width="115" alt="Juun 2" />
+        <img src="./assets/juun/3.png" width="115" alt="Juun 3" />
       </p>
       <p>
-        <code>assets/juun/1.png</code><br />
-        <code>assets/juun/2.png</code><br />
-        <code>assets/juun/3.png</code><br />
-        <code>assets/juun/4.png</code><br />
-        <code>assets/juun/5.png</code>
+        <img src="./assets/juun/4.png" width="135" alt="Juun 4" />
+        <img src="./assets/juun/5.png" width="135" alt="Juun 5" />
       </p>
-
-      <!--
-        JUUN PHOTO GRID — ready for the real photos.
-        When the files are uploaded, these normal <img> tags can be enabled.
-        The README references the PNG files directly; nothing is converted to SVG.
-
-        <p align="center">
-          <img src="./assets/juun/1.png" width="150" alt="Juun 1" />
-          <img src="./assets/juun/2.png" width="110" alt="Juun 2" />
-          <img src="./assets/juun/3.png" width="110" alt="Juun 3" />
-          <br />
-          <img src="./assets/juun/4.png" width="120" alt="Juun 4" />
-          <img src="./assets/juun/5.png" width="120" alt="Juun 5" />
-        </p>
-      -->
+      <sub>01 — 05 · favorite frames</sub>
     </td>
   </tr>
 </table>
