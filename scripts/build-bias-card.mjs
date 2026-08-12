@@ -12,15 +12,14 @@ const photos = fs
   .readdirSync(biasDir)
   .filter((file) => allowed.has(path.extname(file).toLowerCase()))
   .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-  .slice(0, 6);
+  .slice(0, 5);
 
-const positions = [
-  { x: 470, y: 112, r: 64 },
-  { x: 615, y: 102, r: 55 },
-  { x: 735, y: 155, r: 49 },
-  { x: 510, y: 245, r: 52 },
-  { x: 640, y: 235, r: 61 },
-  { x: 755, y: 265, r: 44 },
+const slots = [
+  { x: 585, y: 178, r: 88, label: "JUUN 01" },
+  { x: 434, y: 100, r: 45, label: "02" },
+  { x: 739, y: 102, r: 47, label: "03" },
+  { x: 445, y: 274, r: 50, label: "04" },
+  { x: 738, y: 273, r: 52, label: "05" },
 ];
 
 function mime(file) {
@@ -35,100 +34,103 @@ function dataUri(file) {
   return `data:${mime(file)};base64,${base64}`;
 }
 
-const clips = positions
+const clips = slots
   .map(
-    (p, i) => `
+    (slot, i) => `
     <clipPath id="clip-${i}">
-      <circle cx="${p.x}" cy="${p.y}" r="${p.r}" />
+      <circle cx="${slot.x}" cy="${slot.y}" r="${slot.r}" />
     </clipPath>`,
   )
   .join("");
 
-const circles = positions
-  .map((p, i) => {
-    const hasPhoto = Boolean(photos[i]);
-    const image = hasPhoto
-      ? `<image href="${dataUri(photos[i])}" x="${p.x - p.r}" y="${p.y - p.r}" width="${p.r * 2}" height="${p.r * 2}" preserveAspectRatio="xMidYMid slice" clip-path="url(#clip-${i})" />`
-      : `<circle cx="${p.x}" cy="${p.y}" r="${p.r}" fill="#101722" />
-         <text x="${p.x}" y="${p.y + 5}" text-anchor="middle" fill="#8d99ad" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">PHOTO ${String(i + 1).padStart(2, "0")}</text>`;
+const avatars = slots
+  .map((slot, i) => {
+    const image = photos[i]
+      ? `<image href="${dataUri(photos[i])}" x="${slot.x - slot.r}" y="${slot.y - slot.r}" width="${slot.r * 2}" height="${slot.r * 2}" preserveAspectRatio="xMidYMid slice" clip-path="url(#clip-${i})" />`
+      : `<circle cx="${slot.x}" cy="${slot.y}" r="${slot.r}" fill="#111318" />
+         <text x="${slot.x}" y="${slot.y + 4}" text-anchor="middle" fill="#737983" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="${i === 0 ? 12 : 10}">${slot.label}</text>`;
 
     return `
       <g>
-        <circle cx="${p.x}" cy="${p.y}" r="${p.r + 7}" fill="url(#ring-${i % 3})" opacity="0.92" />
-        <circle cx="${p.x}" cy="${p.y}" r="${p.r + 3}" fill="#0d1117" />
+        <circle cx="${slot.x}" cy="${slot.y}" r="${slot.r + 5}" fill="#171a20" stroke="${i === 0 ? "#8b5cf6" : "#30343b"}" stroke-width="1" />
         ${image}
-        <circle cx="${p.x}" cy="${p.y}" r="${p.r}" fill="none" stroke="#ffffff" stroke-opacity="0.16" />
+        <circle cx="${slot.x}" cy="${slot.y}" r="${slot.r}" fill="none" stroke="#ffffff" stroke-opacity="0.08" />
       </g>`;
   })
   .join("");
 
 const svg = `
-<svg xmlns="http://www.w3.org/2000/svg" width="840" height="350" viewBox="0 0 840 350" role="img" aria-labelledby="title desc">
-  <title id="title">my bias &lt;3</title>
-  <desc id="desc">A dreamy Hearts2Hearts Style-inspired bias gallery for the andhikamarcella profile README.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="360" viewBox="0 0 840 360" role="img" aria-labelledby="title desc">
+  <title id="title">my bias &lt;3 — Juun</title>
+  <desc id="desc">A Fragments UI-inspired profile card for Juun from Hearts2Hearts.</desc>
 
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#101722" />
-      <stop offset="44%" stop-color="#101820" />
-      <stop offset="72%" stop-color="#13241f" />
-      <stop offset="100%" stop-color="#19172c" />
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#a78bfa" />
     </linearGradient>
-    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#59a8ff" />
-      <stop offset="38%" stop-color="#9f8dff" />
-      <stop offset="70%" stop-color="#ff9fd2" />
-      <stop offset="100%" stop-color="#79e4cf" />
-    </linearGradient>
-    <linearGradient id="ring-0"><stop stop-color="#7ec7ff"/><stop offset="1" stop-color="#d2a8ff"/></linearGradient>
-    <linearGradient id="ring-1"><stop stop-color="#ffafd7"/><stop offset="1" stop-color="#9fc7ff"/></linearGradient>
-    <linearGradient id="ring-2"><stop stop-color="#9be9dc"/><stop offset="1" stop-color="#d7abff"/></linearGradient>
-    <radialGradient id="glow-blue"><stop stop-color="#4ea5ff" stop-opacity=".24"/><stop offset="1" stop-color="#4ea5ff" stop-opacity="0"/></radialGradient>
-    <radialGradient id="glow-pink"><stop stop-color="#ff8fcb" stop-opacity=".17"/><stop offset="1" stop-color="#ff8fcb" stop-opacity="0"/></radialGradient>
     ${clips}
   </defs>
 
-  <rect x="1" y="1" width="838" height="348" rx="27" fill="url(#bg)" stroke="url(#border)" stroke-width="1.5" />
-  <circle cx="120" cy="35" r="175" fill="url(#glow-blue)" />
-  <circle cx="720" cy="320" r="180" fill="url(#glow-pink)" />
+  <!-- Fragments-style surface -->
+  <rect x="1" y="1" width="838" height="358" rx="18" fill="#0d0f12" stroke="#282c33" stroke-width="1.2" />
 
-  <rect x="34" y="31" width="116" height="29" rx="14.5" fill="#ffffff" fill-opacity=".035" stroke="#a6bdff" stroke-opacity=".65" />
-  <text x="92" y="50" text-anchor="middle" fill="#bac8e5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" letter-spacing="2">BIAS.LOG</text>
+  <!-- left content card -->
+  <rect x="22" y="22" width="330" height="316" rx="14" fill="#111318" stroke="#24282f" />
 
-  <text x="38" y="126" fill="#f7eaff" font-family="Georgia, serif" font-weight="700" font-size="49">my bias &lt;3</text>
-  <text x="41" y="161" fill="#9acbff" font-family="Georgia, serif" font-style="italic" font-size="22">Style ♡</text>
+  <g font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="44" y="54" fill="#747b86" font-size="10" font-weight="600" letter-spacing="1.8">MY BIAS</text>
 
-  <text x="40" y="207" fill="#9ca7b8" font-family="Arial, sans-serif" font-size="14">you, me, and our</text>
-  <text x="40" y="229" fill="#d5dbe5" font-family="Arial, sans-serif" font-size="14">perfect little style ♡</text>
+    <circle cx="321" cy="48" r="4" fill="#8b5cf6" />
 
-  <g font-family="Arial, sans-serif" font-size="10">
-    <rect x="39" y="266" width="66" height="26" rx="13" fill="#ffffff" fill-opacity=".035" stroke="#f39ccd" stroke-opacity=".76" />
-    <text x="72" y="283" text-anchor="middle" fill="#f7b6db">H2H ♡</text>
-    <rect x="114" y="266" width="63" height="26" rx="13" fill="#ffffff" fill-opacity=".035" stroke="#9dbaff" stroke-opacity=".76" />
-    <text x="145" y="283" text-anchor="middle" fill="#b8caff">STYLE</text>
-    <rect x="186" y="266" width="77" height="26" rx="13" fill="#ffffff" fill-opacity=".035" stroke="#cfa6ff" stroke-opacity=".76" />
-    <text x="224" y="283" text-anchor="middle" fill="#d8bfff">DREAMY</text>
+    <text x="42" y="105" fill="#f5f5f6" font-size="36" font-weight="700">Juun &lt;3</text>
+    <text x="43" y="132" fill="#979da7" font-size="13">Hearts2Hearts · 03 Dec 2008</text>
+
+    <!-- badge row -->
+    <rect x="42" y="157" width="110" height="25" rx="7" fill="#171a20" stroke="#2c3038" />
+    <text x="97" y="173.5" text-anchor="middle" fill="#c9cbd0" font-size="10" font-weight="600">HEARTS2HEARTS</text>
+
+    <rect x="160" y="157" width="58" height="25" rx="7" fill="#1a1626" stroke="#4c3970" />
+    <text x="189" y="173.5" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="600">JUUN</text>
+
+    <rect x="226" y="157" width="77" height="25" rx="7" fill="#171a20" stroke="#2c3038" />
+    <text x="264.5" y="173.5" text-anchor="middle" fill="#c9cbd0" font-size="10" font-weight="600">MY BIAS</text>
+
+    <!-- human note -->
+    <text x="42" y="222" fill="#e4e5e7" font-size="14" font-weight="500">my favorite in Hearts2Hearts.</text>
+    <text x="42" y="247" fill="#a4a9b2" font-size="13">i always end up watching her first —</text>
+    <text x="42" y="268" fill="#a4a9b2" font-size="13">her dancing is so clean, and she has</text>
+    <text x="42" y="289" fill="#a4a9b2" font-size="13">this cool-but-playful vibe i really like.</text>
+
+    <line x1="42" y1="310" x2="311" y2="310" stroke="#24282f" />
+    <text x="42" y="327" fill="#666d77" font-size="10">just a tiny juun corner on my github ♡</text>
   </g>
 
-  <g fill="#d7c5ff" font-family="Arial, sans-serif">
-    <text x="337" y="72" font-size="18">✦</text>
-    <text x="790" y="66" font-size="14">✧</text>
-    <text x="384" y="188" font-size="11">✦</text>
-    <text x="798" y="230" font-size="17">✦</text>
-    <text x="325" y="319" font-size="14">✧</text>
-  </g>
-  <g fill="#f7afd5" font-family="Arial, sans-serif">
-    <text x="402" y="43" font-size="13">♥</text>
-    <text x="664" y="50" font-size="14">♡</text>
-    <text x="810" y="158" font-size="14">♡</text>
+  <!-- gallery surface -->
+  <rect x="370" y="22" width="448" height="316" rx="14" fill="#0f1115" stroke="#24282f" />
+
+  <g font-family="Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="392" y="53" fill="#e5e7eb" font-size="12" font-weight="600">favorite frames</text>
+    <text x="796" y="53" text-anchor="end" fill="#666d77" font-size="10">01 — 05</text>
+
+    <line x1="392" y1="68" x2="796" y2="68" stroke="#24282f" />
   </g>
 
-  ${circles}
+  ${avatars}
 
-  <text x="40" y="324" fill="#697586" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" letter-spacing="1.5">HEARTS / FAVORITES / MEMORY</text>
+  <!-- small component-like labels -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9">
+    <rect x="390" y="314" width="74" height="18" rx="6" fill="#15181d" stroke="#292d34" />
+    <text x="427" y="326.5" text-anchor="middle" fill="#777e88">FRAGMENT 01</text>
+
+    <rect x="704" y="314" width="94" height="18" rx="6" fill="#15181d" stroke="#292d34" />
+    <text x="751" y="326.5" text-anchor="middle" fill="#777e88">JUUN GALLERY</text>
+  </g>
+
+  <rect x="370" y="337" width="448" height="1" fill="url(#accent)" opacity="0.72" />
 </svg>`;
 
 fs.mkdirSync(path.dirname(output), { recursive: true });
 fs.writeFileSync(output, svg.trimStart(), "utf8");
 
-console.log(`♡ generated assets/my-bias.svg using ${photos.length} photo(s)`);
+console.log(`generated assets/my-bias.svg using ${photos.length} Juun photo(s)`);
