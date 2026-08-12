@@ -6,9 +6,9 @@
   <picture><source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/about?username=andhikamarcella&theme=github-dark&mode=light" /><img src="https://www.gitskins.com/api/section/about?username=andhikamarcella&theme=github-dark" alt="About cellauu" /></picture>
 </p>
 
-<!-- my bias <3 — coded SVG, generated from assets/bias/ -->
+<!-- my bias <3 — Juun / Hearts2Hearts, Fragments UI-inspired coded SVG -->
 <p align="center">
-  <img src="./assets/my-bias.svg" alt="my bias <3 — Hearts2Hearts Style-inspired gallery" width="100%" />
+  <img src="./assets/my-bias.svg" alt="my bias <3 — Juun from Hearts2Hearts" width="100%" />
 </p>
 
 <p align="center">
