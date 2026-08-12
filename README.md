@@ -88,19 +88,14 @@
     <td width="60%" valign="top" align="center">
       <sub>FAVORITE FRAMES</sub>
       <h3>Juun gallery</h3>
-      <p>
-        <img src="./assets/juun/1.png" width="115" alt="Juun 1" />
-        &nbsp;
-        <img src="./assets/juun/2.png" width="115" alt="Juun 2" />
-        &nbsp;
-        <img src="./assets/juun/3.png" width="115" alt="Juun 3" />
+      <p align="center">
+        <img src="./assets/juun/1.png" width="90" alt="Juun 1" />&nbsp;
+        <img src="./assets/juun/2.png" width="90" alt="Juun 2" />&nbsp;
+        <img src="./assets/juun/3.png" width="90" alt="Juun 3" />&nbsp;
+        <img src="./assets/juun/4.png" width="90" alt="Juun 4" />&nbsp;
+        <img src="./assets/juun/5.png" width="90" alt="Juun 5" />
       </p>
-      <p>
-        <img src="./assets/juun/4.png" width="115" alt="Juun 4" />
-        &nbsp;
-        <img src="./assets/juun/5.png" width="115" alt="Juun 5" />
-      </p>
-      <sub>five photos. zero chance i picked a favorite.</sub>
+      <sub>five photos, one row, still impossible to pick a favorite.</sub>
     </td>
   </tr>
 </table>
