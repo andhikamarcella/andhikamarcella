@@ -6,6 +6,11 @@
   <picture><source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/about?username=andhikamarcella&theme=github-dark&mode=light" /><img src="https://www.gitskins.com/api/section/about?username=andhikamarcella&theme=github-dark" alt="About cellauu" /></picture>
 </p>
 
+<!-- my bias <3 — Juun / Hearts2Hearts, Fragments UI-inspired coded SVG -->
+<p align="center">
+  <img src="./assets/my-bias.svg" alt="my bias <3 — Juun from Hearts2Hearts" width="100%" />
+</p>
+
 <p align="center">
   <picture><source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/stack?username=andhikamarcella&theme=github-dark&mode=light" /><img src="https://www.gitskins.com/api/section/stack?username=andhikamarcella&theme=github-dark" alt="Language stack" /></picture>
 </p>
